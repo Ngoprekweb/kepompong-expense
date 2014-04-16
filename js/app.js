@@ -15,6 +15,6 @@ $(function() {
 
 $(document).ready(function(){
 	$('#myModal').on('shown.bs.modal',function(e){
-		$('.datepicker').datepicker({'z-index':1000});
+		$('.datepicker').pickadate();
 	});
 });
