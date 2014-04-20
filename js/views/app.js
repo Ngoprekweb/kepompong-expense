@@ -1,24 +1,29 @@
-var app = app || {};
-
 app.AppView = Backbone.View.extend({
-	el:'#main-table',
-	render:function(){
-		//this.$el.html('<table></table>');
-		this.$main = this.$('table');
+	initialize:function(options){
+		this.expenses = options.expenses;
 
+		this.expenses.bind('add', this.addOne, this);
+
+		console.log('initialize appView');
+		//console.log(this.expenses);
+
+		this.$content = this.$('tbody');
+	},
+	template: _.template($('#tpl-table').html()),
+	render:function(){
+		this.$el.html(this.template());
+
+		this.$content.empty(); // make sure the content is empty before re-populate
+		_this = this;
+
+        this.expenses.forEach(function (expense) {
+            _this.addOne(expense);
+        });
 
 		return this;
 	},
-	initialize:function(){
-		this.listenTo(app.Expenses, 'add', this.addOne);
-		app.Expenses.fetch();
-	},
 	addOne:function( expense ){
-		this.$el.append(new app.ExpenseView({model: expense}).render().el);
-	},
-	events:{
-		'click button.btn':function(){
-			alert('telo');
-		}
+		var rowView = new app.RowView({model:expense});
+		this.$('tbody').append(rowView.render().el);
 	}
 });

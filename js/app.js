@@ -1,20 +1,17 @@
-var app = app || {};
-var ENTER_KEY = 13;
-
-$(function() {
-
-	// Kick things off by creating the **App**.
-	
-	var v = new app.AppView();
-	v.render();
-
-	console.log(v.render().el);
+var app = {
+	models:{},
+	views:{}
+};
 
 
-});
 
 $(document).ready(function(){
-	$('#myModal').on('shown.bs.modal',function(e){
-		$('.datepicker').pickadate();
+	app.router = new app.ExpenseRouter({
+		expenses: new app.ExpenseCollection()
 	});
+
+	//app.ExpenseRouter.expenses.fetch();
+	app.router.expenses.fetch();
+
+	Backbone.history.start();
 });

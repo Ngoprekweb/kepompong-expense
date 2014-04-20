@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Eris Test</title>
+  <title>Expense</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="js/lib/pickadate/themes/classic.css">
@@ -11,67 +11,72 @@
 </head>
 <body>
 
-    <div class="container-fluid">
+<script id="tpl-navbar" type="text/template">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Expense</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li rel="add"><a href="#add">Add</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</script>
+
+    <div class="container-fluid" id="main-content">
+    </div>
+
+
+<script id="tpl-home" type="text/template">
         <div class="row">
-            <div class="col-md-12">
-                <table class="table" id="main-table"></table>
-<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
+            <div class="col-md-12" id="main-table">
+                
             </div>
         </div>
-    </div>
+</script>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <form role="form">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control datepicker" id="exampleInputEmail1" placeholder="Enter email">
-    
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Example block-level help text here.</p>
-  </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
-  </div>
-</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script id="template" type="text/template">
-    <table class="table table-hover table-condensed">
-        <tr>
-            <td>Name</td>
-            <td>{{ name }}</td>
-        </tr>
-        <tr>
-            <td>Age</td>
-            <td>{{ age }}</td>
-        </tr>
+<script id="tpl-table" type="text/template">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Vendor</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
-    <button class="btn btn-primary">Eris ohowy</button>
+</script>
+
+<script id="tpl-form" type="text/template">
+        <div class="row">
+            <div class="col-md-12" id="main-table">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="fDate">Date</label>
+                        <input type="text" class="form-control datepicker" id="fDate" placeholder="Enter date" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="fName">Name</label>
+                        <input type="text" class="form-control" id="fName" placeholder="Name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fVendor">Vendor</label>
+                        <input type="text" class="form-control" id="fVendor" placeholder="Vendor" name="vendor">
+                    </div>
+                    <div class="form-group">
+                        <label for="fPrice">Price</label>
+                        <input type="text" class="form-control" id="fPrice" placeholder="Price" name="price">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
 </script>
 
     <script src="js/lib/jquery.min.js"></script>
@@ -83,13 +88,21 @@
     <script src="js/lib/pickadate/picker.js"></script>
     <script src="js/lib/pickadate/picker.date.js"></script>
     <script src="js/lib/pickadate/legacy.js"></script>
+    <script src="js/lib/backbone.bootstrap-modal.js"></script>
+    <script src="js/lib/moment.min.js"></script>
+    <script src="js/lib/jquery.validate.min.js"></script>
 
+    <script src="js/app.js"></script>
     <script src="js/models/expense.js"></script>
     <script src="js/collections/expenses.js"></script>
     
-    <script src="js/views/expense.js"></script>
+    <script src="js/views/navbar.js"></script>
+    <script src="js/views/form.js"></script>
+    <script src="js/views/row.js"></script>
     <script src="js/views/app.js"></script>
 
-    <script src="js/app.js"></script>
+    <script src="js/routers/router.js"></script>
+
+    
 </body>
 </html>
